@@ -7,8 +7,9 @@ Project description: <br>
 
 시작 20/09/16 - 진행중
 
-상단바에 hard notification (어플들어가서 끄기전에 끌 수 없는 알림) 으로 남거나
-일정앱처럼 정해진 시간에 울리는 기능 두가지를 계획하였습니다.
+기능으로는 <br>
++ 상단바에 hard notification (어플들어가서 끄기전에 끌 수 없는 알림) 으로 남거나 <br>
++ 일정앱처럼 정해진 시간에 울리는 기능 두가지를 계획하였습니다.
 
 ## 프로젝트 계획동기
 Why I planned this project:
