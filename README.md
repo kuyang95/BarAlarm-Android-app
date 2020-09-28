@@ -1,4 +1,3 @@
-# BarAlarm-Android-app
 # 상단bar, 알림씨
 Project description: <br>
 
