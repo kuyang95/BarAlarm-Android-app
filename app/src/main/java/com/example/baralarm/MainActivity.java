@@ -1,16 +1,23 @@
 package com.example.baralarm;
 
+import android.support.v
+import android.app.Notification.Style;
+import android.media.session.MediaSession;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.session.MediaSession;
 import android.os.Build;
+import android.service.controls.actions.CommandAction;
 import android.view.LayoutInflater;
 import android.view.View;
 import java.util.zip.Inflater;
@@ -25,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+
+    MediaSession.Token ms =
+
     public void onClicked(View view){
 
         // 알림(Notification) 을 관리하는 관리자 객체를 운영체제(Context)로부터 소환하기
@@ -32,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Notification 객체를 생성해주는 건축가객체 생성(AlertDialog 와 비슷)
         NotificationCompat.Builder builder = null;
+
 
         // Oreo 버전(API26 버전) 이상에서는 알림시에 NotificationChannel 이라는 개념이 필수 구성요소가 됨
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -55,27 +66,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // 건축가에게 원하는 알림의 설정작업
-        builder.setSmallIcon(android.R.drawable.ic_menu_view);
+        //builder.setSmallIcon(android.R.drawable.ic_menu_view);
 
-        // 상태바를 드래그하여 아래로 내리면 보이는
+        //Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
+        //PendingIntent whatis = PendingIntent.getActivity(getBaseContext(), 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         // 알림창(확장 상태바) 의 설정
-        builder.setContentTitle("Title"); // 알림창 제목
-        builder.setContentText("Messages..."); // 알림창 내용
+        //builder.setContentTitle("Title"); // 알림창 제목
+        //builder.setContentText("Messages..."); // 알림창 내용
 
-        RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.activity_notipage);
-        builder.setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                .setCustomContentView(notificationLayout);
-
-
-
+        //RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.activity_notipage);
         // 알림창의 큰 이미지
-        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.introimage);
-        builder.setLargeIcon(bm); // 매개변수가 Bitmap 을 줘야한다.
+        //Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.introimage);
+        //builder.setLargeIcon(bm); // 매개변수가 Bitmap 을 줘야한다.
+
+        builder.addAction(R.drawable.check2, "hi", null);
+        builder.addAction(R.drawable.check, "", null);
+        builder.addAction(R.drawable.check, "", null);
+        builder.setStyle(new Notification.MediaStyle().setMediaSession(ms));
+
+
+
 
         // 건축가에게 알림 객체 생성하도록
         Notification notification = builder.build();
 
-        // 알림매니저에게 알림(Notify) 요
+        // 알림매니저에게 알림(Notify) 요청
         notificationManager.notify(1, notification);
     }
 }
