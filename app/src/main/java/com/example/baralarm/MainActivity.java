@@ -1,6 +1,5 @@
 package com.example.baralarm;
 
-import android.support.v
 import android.app.Notification.Style;
 import android.media.session.MediaSession;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,17 +22,23 @@ import android.view.View;
 import java.util.zip.Inflater;
 import android.os.Bundle;
 import android.widget.RemoteViews;
+import android.support.v4.media.session.MediaSessionCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    public MediaSessionCompat mediaSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mediaSession = new MediaSessionCompat(this, "tag");
+
     }
 
 
-    MediaSession.Token ms =
+
 
     public void onClicked(View view){
 
@@ -65,24 +70,28 @@ public class MainActivity extends AppCompatActivity {
             builder = new NotificationCompat.Builder(this, null);
         }
 
+
         // 건축가에게 원하는 알림의 설정작업
-        //builder.setSmallIcon(android.R.drawable.ic_menu_view);
+        builder.setSmallIcon(android.R.drawable.star_big_on);
 
         //Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
         //PendingIntent whatis = PendingIntent.getActivity(getBaseContext(), 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         // 알림창(확장 상태바) 의 설정
-        //builder.setContentTitle("Title"); // 알림창 제목
-        //builder.setContentText("Messages..."); // 알림창 내용
+        builder.setContentTitle("김문정"); // 알림창 제목
+        builder.setContentText("정말정말 알라뷰"); // 알림창 내용
 
         //RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.activity_notipage);
         // 알림창의 큰 이미지
-        //Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.introimage);
-        //builder.setLargeIcon(bm); // 매개변수가 Bitmap 을 줘야한다.
+        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.notification_largeicon);
+        builder.setLargeIcon(bm); // 매개변수가 Bitmap 을 줘야한다.
 
-        builder.addAction(R.drawable.check2, "hi", null);
-        builder.addAction(R.drawable.check, "", null);
-        builder.addAction(R.drawable.check, "", null);
-        builder.setStyle(new Notification.MediaStyle().setMediaSession(ms));
+        builder.addAction(R.drawable.ic_order, "order", null);
+        //builder.addAction(R.drawable.ic_pay, "pay", null);
+        builder.addAction(R.drawable.ic_checkbox, "checkbox", null);
+
+
+        builder.setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setMediaSession(mediaSession.getSessionToken())
+        .setShowActionsInCompactView(1));
 
 
 
